@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://bdhpo6wross4e"]
+[gd_scene load_steps=3 format=3 uid="uid://bdhpo6wross4e"]
+
+[ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="1_7u4ml"]
+[ext_resource type="PackedScene" uid="uid://cidoetm4fa0at" path="res://Scenes/Levels/Platform.tscn" id="2_16p8j"]
 
 [node name="Level" type="Node2D"]
+
+[node name="Knight" parent="." instance=ExtResource("1_7u4ml")]
+position = Vector2(324, 149)
+
+[node name="Platform" parent="." instance=ExtResource("2_16p8j")]
+position = Vector2(302, 159)
+
+[node name="Platform2" parent="." instance=ExtResource("2_16p8j")]
+position = Vector2(334, 159)
+
+[node name="Platform3" parent="." instance=ExtResource("2_16p8j")]
+position = Vector2(370, 188)
+
+[node name="Platform4" parent="." instance=ExtResource("2_16p8j")]
+position = Vector2(402, 188)
+
+[node name="Platform5" parent="." instance=ExtResource("2_16p8j")]
+position = Vector2(447, 157)
