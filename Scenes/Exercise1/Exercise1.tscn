@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://byhcco7gt7375"]
+
+[ext_resource type="Script" uid="uid://bsn7qjux4flf1" path="res://Code/Examples/Hello.gd" id="1_j0nxu"]
+[ext_resource type="Script" uid="uid://b50ku5fwlhhgw" path="res://Code/Examples/Fibonacci.gd" id="2_tdye5"]
+[ext_resource type="Texture2D" uid="uid://mh1n6pnxl8go" path="res://icon.svg" id="3_ldmta"]
+[ext_resource type="Script" uid="uid://6hl8pggv2t0" path="res://Code/Examples/ProtoMover.gd" id="4_y4sse"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Hello" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("1_j0nxu")
+
+[node name="Fibonacci" type="Node" parent="."]
+script = ExtResource("2_tdye5")
+
+[node name="ProtoMover" type="Sprite2D" parent="." node_paths=PackedStringArray("_point1", "_point2")]
+position = Vector2(971, 533)
+texture = ExtResource("3_ldmta")
+script = ExtResource("4_y4sse")
+_direction = Vector2(1, 1)
+_speed = 50.0
+_bounce_between = true
+_point1 = NodePath("../Point1")
+_point2 = NodePath("../Point2")
+
+[node name="Point1" type="Node2D" parent="."]
+position = Vector2(1055, 566)
+
+[node name="Point2" type="Node2D" parent="."]
+position = Vector2(63, 51)
