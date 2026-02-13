@@ -1,12 +1,4 @@
-All assets in the pack have been repackaged and many have been modified by Brackeys.
-
-
-LICENSE for all assets:
-
-Creative Commons Zero (CC0)
-
-
-CREDIT:
+## CREDIT
 
 SPRITES by analogStudios_:
 knight (https://analogstudios.itch.io/camelot)
