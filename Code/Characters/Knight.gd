@@ -3,11 +3,14 @@ class_name Knight
 
 @export var _speed : float = 100
 @export var _jump_velocity : float = 200
+@export var _max_jumps : int = 2 # How many times the character can jump between touching ground.
+
 @onready var _animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 #region Input variables
 var _horizontal_input : float = 0
 var _is_jumping : bool = false
+var _jump_count : int = 0
 #endregion
 
 #region Godot functionality
@@ -30,7 +33,6 @@ func _physics_process(delta: float) -> void:
 	_handle_move()
 	
 	# 4. Päivitä animaatiot
-	# TODO: Implement me!
 	_update_animations()
 	
 	# 5. Väiltä tiedot fysiikkamoottorille
@@ -43,10 +45,17 @@ func _apply_gravity(delta : float) -> void:
 		velocity += get_gravity() * delta
 
 func _handle_jump() -> void:
-	if _is_jumping and is_on_floor():
+	var is_on_ground : bool = is_on_floor()
+	
+	if _is_jumping and (is_on_ground or _jump_count < _max_jumps - 1):
 		velocity.y = -_jump_velocity
-		# "Käytä" hyppyinput
-		_is_jumping = false
+		_jump_count += 1
+	
+	if is_on_ground:
+		_jump_count = 0
+	
+	# "Käytä" hyppyinput
+	_is_jumping = false
 
 func _handle_move() -> void:
 	# 1. Jos syöte on olemassa, eli ei 0, liiku syötteen mukaisesti
@@ -64,5 +73,12 @@ func _update_animations() -> void:
 	# * idle
 	# * move
 	# * tai jump
-	pass
+	# TODO: Lisää erillinen fall-animaatio hypyn lisäksi.
+	if not is_on_floor():
+		_animated_sprite_2d.play("jump")
+	elif is_zero_approx(velocity.x):
+		_animated_sprite_2d.play("idle")
+	else:
+		_animated_sprite_2d.play("move")
+	
 #endregion
