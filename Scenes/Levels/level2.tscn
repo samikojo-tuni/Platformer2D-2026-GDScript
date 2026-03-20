@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://dddfp7vmt458o"]
+[gd_scene load_steps=10 format=4 uid="uid://dddfp7vmt458o"]
 
 [ext_resource type="Script" uid="uid://bq3k8h1d037yt" path="res://Code/Level/Level.gd" id="1_5j5u1"]
 [ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="2_tnuy3"]
 [ext_resource type="PackedScene" uid="uid://chv0cnt1a11yb" path="res://Scenes/Levels/LevelObjects/coin.tscn" id="3_d15yg"]
 [ext_resource type="TileSet" uid="uid://dfdsda277xidk" path="res://Scenes/Levels/LevelObjects/level-tiles.tres" id="4_hrj3c"]
 [ext_resource type="Texture2D" uid="uid://cronuwgcvhps" path="res://Art/sprites/world_tileset.png" id="5_16px4"]
+[ext_resource type="Script" uid="uid://dnxgt2jguiqky" path="res://Code/Level/FollowCamera.gd" id="6_tnuy3"]
+[ext_resource type="PackedScene" uid="uid://cpr4wvwpkjrlg" path="res://Scenes/UI/Healthbar.tscn" id="7_d15yg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("5_16px4")
@@ -189,3 +191,12 @@ tile_set = ExtResource("4_hrj3c")
 [node name="Foreground-no-collision" type="TileMapLayer" parent="."]
 z_index = 1
 tile_set = SubResource("TileSet_m0h5h")
+
+[node name="FollowCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("6_tnuy3")
+target = NodePath("../Knight")
+metadata/_custom_type_script = "uid://dnxgt2jguiqky"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("7_d15yg")]
