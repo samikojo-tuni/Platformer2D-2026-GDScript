@@ -10,6 +10,15 @@ class_name Slime extends Area2D
 @export var bounce_force: float = -200
 @export var damage_time: float = 1
 
+var _path_follower : PathFollower = null
+
+func _ready() -> void:
+	_path_follower = get_parent() as PathFollower
+
+func _process(_delta: float) -> void:
+	if _path_follower != null:
+		animated_sprite_2d.flip_h = _path_follower.direction < 0
+
 func _on_take_damage(body: Node2D) -> void:
 	if body is Knight:
 		var knight : Knight = body as Knight
