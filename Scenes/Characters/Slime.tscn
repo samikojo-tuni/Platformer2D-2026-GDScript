@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://7g60dv6p8xfg"]
+
+[ext_resource type="Script" uid="uid://hubofb5f004q" path="res://Code/Characters/Slime.gd" id="1_a0wpb"]
+[ext_resource type="Script" uid="uid://rvaecdhhl8hd" path="res://Code/Characters/Health.gd" id="2_ns5c0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y7nxl"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xrbh"]
+size = Vector2(6, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0wpb"]
+size = Vector2(6, 15)
+
+[node name="Slime" type="Area2D"]
+script = ExtResource("1_a0wpb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_y7nxl")
+debug_color = Color(0, 1, 0, 0.41960785)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="Damagers" type="Node2D" parent="."]
+
+[node name="Front" type="Area2D" parent="Damagers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damagers/Front"]
+position = Vector2(6, -7.5)
+shape = SubResource("RectangleShape2D_1xrbh")
+debug_color = Color(0.9843137, 0, 0, 0.41960785)
+
+[node name="Back" type="Area2D" parent="Damagers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damagers/Back"]
+position = Vector2(-6, -7.5)
+shape = SubResource("RectangleShape2D_a0wpb")
+debug_color = Color(0.9843137, 0, 0, 0.41960785)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_ns5c0")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_take_damage"]
+[connection signal="body_entered" from="Damagers/Front" to="." method="_on_damage_other"]
+[connection signal="body_entered" from="Damagers/Back" to="." method="_on_damage_other"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_changed"]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2cgpals4ls36"]
+
+[ext_resource type="PackedScene" uid="uid://7g60dv6p8xfg" path="res://Scenes/Characters/Slime.tscn" id="1_v7i81"]
+[ext_resource type="Texture2D" uid="uid://dchg7yt0efou6" path="res://Art/sprites/slime_purple.png" id="2_ivyo6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huasn"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5kc6"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brfu3"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4fgv"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wytx3"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7ckv"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tj88"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c06vo"]
+atlas = ExtResource("2_ivyo6")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uhir6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huasn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5kc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brfu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4fgv")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wytx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7ckv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tj88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c06vo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Slime" instance=ExtResource("1_v7i81")]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_uhir6")
+animation = &"damage"
+autoplay = "default"
+frame_progress = 0.5581836

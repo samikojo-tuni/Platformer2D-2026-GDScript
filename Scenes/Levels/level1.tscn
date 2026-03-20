@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bdhpo6wross4e"]
+[gd_scene load_steps=11 format=4 uid="uid://bdhpo6wross4e"]
 
 [ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="1_7u4ml"]
 [ext_resource type="Script" uid="uid://bq3k8h1d037yt" path="res://Code/Level/Level.gd" id="1_c0r4e"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://dfdsda277xidk" path="res://Scenes/Levels/LevelObjects/level-tiles.tres" id="2_16p8j"]
 [ext_resource type="Texture2D" uid="uid://cronuwgcvhps" path="res://Art/sprites/world_tileset.png" id="4_0xrym"]
 [ext_resource type="Script" uid="uid://6ad0oj2yn8x6" path="res://Code/Level/Goal.gd" id="6_m0h5h"]
+[ext_resource type="PackedScene" uid="uid://c2cgpals4ls36" path="res://Scenes/Characters/StrongSlime.tscn" id="7_20uw2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("4_0xrym")
@@ -209,5 +210,8 @@ texture = ExtResource("4_0xrym")
 hframes = 16
 vframes = 16
 frame = 33
+
+[node name="Slime" parent="." instance=ExtResource("7_20uw2")]
+position = Vector2(158, 161)
 
 [connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]

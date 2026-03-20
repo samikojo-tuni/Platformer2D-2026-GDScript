@@ -1,5 +1,5 @@
-extends CharacterBody2D
 class_name Knight
+extends CharacterBody2D
 
 @export var _speed : float = 100
 @export var _jump_velocity : float = 200
@@ -83,7 +83,12 @@ func _update_animations() -> void:
 	else:
 		_animated_sprite_2d.play("move")
 	
-#endregion
-
 func _on_health_changed(previous_health: int, current_health: int) -> void:
 	print("Knight's health changed: %s" % current_health)
+	
+#endregion
+
+#region Public API
+func bounce(bounce_force: Vector2) -> void:
+	velocity += bounce_force
+#endregion
