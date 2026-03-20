@@ -4,9 +4,11 @@ extends CharacterBody2D
 @export var _speed : float = 100
 @export var _jump_velocity : float = 200
 @export var _max_jumps : int = 2 # How many times the character can jump between touching ground.
+@export var _damage_time : float = 1
 
 @onready var _animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health: Health = $Health
+@onready var damage_timer: Timer = $DamageTimer
 
 
 #region Input variables
@@ -76,7 +78,9 @@ func _update_animations() -> void:
 	# * move
 	# * tai jump
 	# TODO: Lisää erillinen fall-animaatio hypyn lisäksi.
-	if not is_on_floor():
+	if health.is_immortal:
+		_animated_sprite_2d.play("damage")
+	elif not is_on_floor():
 		_animated_sprite_2d.play("jump")
 	elif is_zero_approx(velocity.x):
 		_animated_sprite_2d.play("idle")
@@ -84,7 +88,21 @@ func _update_animations() -> void:
 		_animated_sprite_2d.play("move")
 	
 func _on_health_changed(previous_health: int, current_health: int) -> void:
-	print("Knight's health changed: %s" % current_health)
+	if current_health <= 0:
+		_die()
+	elif current_health < previous_health:
+		# Heath is reduced
+		health.is_immortal = true
+		damage_timer.start(_damage_time)
+		damage_timer.timeout.connect(_on_timer_timeout)
+	
+func _on_timer_timeout() -> void:
+	damage_timer.timeout.disconnect(_on_timer_timeout)
+	health.is_immortal = false
+	
+func _die() -> void:
+	# TODO: Replace with respawn!
+	queue_free()
 	
 #endregion
 

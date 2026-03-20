@@ -1,8 +1,24 @@
-[gd_scene load_steps=34 format=3 uid="uid://crcac03n0c3pb"]
+[gd_scene load_steps=38 format=3 uid="uid://crcac03n0c3pb"]
 
 [ext_resource type="Script" uid="uid://lsspyrpy8v2j" path="res://Code/Characters/Knight.gd" id="1_m1nda"]
 [ext_resource type="Texture2D" uid="uid://dy0sggae4huq0" path="res://Art/sprites/knight.png" id="1_sg6lf"]
 [ext_resource type="Script" uid="uid://rvaecdhhl8hd" path="res://Code/Characters/Health.gd" id="3_opp7e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i14ug"]
+atlas = ExtResource("1_sg6lf")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id7qv"]
+atlas = ExtResource("1_sg6lf")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hayb"]
+atlas = ExtResource("1_sg6lf")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_677bj"]
+atlas = ExtResource("1_sg6lf")
+region = Rect2(96, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1nda"]
 atlas = ExtResource("1_sg6lf")
@@ -120,6 +136,23 @@ region = Rect2(224, 96, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_i14ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id7qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hayb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_677bj")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_m1nda")
 }, {
 "duration": 1.0,
@@ -228,8 +261,9 @@ script = ExtResource("1_m1nda")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_5v0xm")
-animation = &"jump"
+animation = &"damage"
 autoplay = "idle"
+frame_progress = 0.96625984
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
@@ -237,5 +271,7 @@ shape = SubResource("CapsuleShape2D_ei6d8")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_opp7e")
+
+[node name="DamageTimer" type="Timer" parent="."]
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_changed"]

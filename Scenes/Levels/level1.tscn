@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bdhpo6wross4e"]
+[gd_scene load_steps=17 format=4 uid="uid://bdhpo6wross4e"]
 
 [ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="1_7u4ml"]
 [ext_resource type="Script" uid="uid://bq3k8h1d037yt" path="res://Code/Level/Level.gd" id="1_c0r4e"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bpvcav52jl3q4" path="res://Code/Characters/PathFollower.gd" id="7_20uw2"]
 [ext_resource type="PackedScene" uid="uid://dmnd1v0f64vbv" path="res://Scenes/Characters/WeakSlime.tscn" id="8_i36j2"]
 [ext_resource type="PackedScene" uid="uid://c2cgpals4ls36" path="res://Scenes/Characters/StrongSlime.tscn" id="9_hkfpk"]
+[ext_resource type="Script" uid="uid://cg0do4w017ecq" path="res://Code/UI/Healthbar.gd" id="10_ir7pk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("4_0xrym")
@@ -153,7 +154,7 @@ point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_hkfpk"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 183, 114, -10.18, 0, 0, 7.705, 221, 140, 0, 0, 0, 0, 258, 113)
+"points": PackedVector2Array(0, 0, 0, 5, 182, 115, -15, 0, 15, 0, 220, 140, 0, 5, 0, 0, 258, 115)
 }
 point_count = 3
 
@@ -261,11 +262,20 @@ speed = 10.0
 curve = SubResource("Curve2D_hkfpk")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="CoinPaths/Path2D"]
-position = Vector2(183, 114)
-rotation = 0.7515945
+position = Vector2(182, 115)
+rotation = 1.5707964
 script = ExtResource("7_20uw2")
 speed = 20.0
 
 [node name="Coin" parent="CoinPaths/Path2D/PathFollow2D" instance=ExtResource("2_1ukdm")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Healthbar" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 315.0
+offset_bottom = 21.0
+script = ExtResource("10_ir7pk")
 
 [connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
