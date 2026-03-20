@@ -6,6 +6,8 @@ class_name Knight
 @export var _max_jumps : int = 2 # How many times the character can jump between touching ground.
 
 @onready var _animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health: Health = $Health
+
 
 #region Input variables
 var _horizontal_input : float = 0
@@ -82,3 +84,6 @@ func _update_animations() -> void:
 		_animated_sprite_2d.play("move")
 	
 #endregion
+
+func _on_health_changed(previous_health: int, current_health: int) -> void:
+	print("Knight's health changed: %s" % current_health)

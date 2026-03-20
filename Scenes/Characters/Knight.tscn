@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://crcac03n0c3pb"]
+[gd_scene load_steps=34 format=3 uid="uid://crcac03n0c3pb"]
 
 [ext_resource type="Script" uid="uid://lsspyrpy8v2j" path="res://Code/Characters/Knight.gd" id="1_m1nda"]
 [ext_resource type="Texture2D" uid="uid://dy0sggae4huq0" path="res://Art/sprites/knight.png" id="1_sg6lf"]
+[ext_resource type="Script" uid="uid://rvaecdhhl8hd" path="res://Code/Characters/Health.gd" id="3_opp7e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1nda"]
 atlas = ExtResource("1_sg6lf")
@@ -233,3 +234,8 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_ei6d8")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_opp7e")
+
+[connection signal="health_changed" from="Health" to="." method="_on_health_changed"]
