@@ -13,6 +13,9 @@ var is_immortal : bool = false
 func _ready() -> void:
 	reset()
 
+func is_alive() -> bool:
+	return _current_health > 0
+
 func get_current_health() -> int:
 	return _current_health
 	

@@ -78,7 +78,9 @@ func _update_animations() -> void:
 	# * move
 	# * tai jump
 	# TODO: Lisää erillinen fall-animaatio hypyn lisäksi.
-	if health.is_immortal:
+	if not health.is_alive():
+		return
+	elif health.is_immortal:
 		_animated_sprite_2d.play("damage")
 	elif not is_on_floor():
 		_animated_sprite_2d.play("jump")
@@ -101,8 +103,20 @@ func _on_timer_timeout() -> void:
 	health.is_immortal = false
 	
 func _die() -> void:
-	# TODO: Replace with respawn!
-	queue_free()
+	_animated_sprite_2d.play("die")
+	# Aloittaa signaalin kuuntelun
+	_animated_sprite_2d.animation_finished.connect(_on_animation_finished)
+
+func _on_animation_finished() -> void:
+	if _animated_sprite_2d.animation == "die":
+		# Siirrä hahmo alkupisteeseen
+		GameManager.get_current_level().respawn_knight()
+		# Toista animaatio henkiin herättyä
+		_animated_sprite_2d.play("spawn")
+	elif _animated_sprite_2d.animation == "spawn":
+		health.reset()
+		# Päättää  signaalin kuuntelun
+		_animated_sprite_2d.animation_finished.disconnect(_on_animation_finished)
 	
 #endregion
 

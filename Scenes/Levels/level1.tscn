@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c2cgpals4ls36" path="res://Scenes/Characters/StrongSlime.tscn" id="9_hkfpk"]
 [ext_resource type="PackedScene" uid="uid://csw86484h6vjr" path="res://Scenes/UI/MainUI.tscn" id="10_ilsv2"]
 [ext_resource type="Script" uid="uid://dnxgt2jguiqky" path="res://Code/Level/FollowCamera.gd" id="11_ilsv2"]
+[ext_resource type="PackedScene" uid="uid://dnofut7wu4b8p" path="res://Scenes/Levels/KillZone.tscn" id="12_4f2fw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("4_0xrym")
@@ -280,5 +281,8 @@ limit_right = 687
 limit_bottom = 375
 script = ExtResource("11_ilsv2")
 target = NodePath("../Knight")
+
+[node name="KillZone" parent="." instance=ExtResource("12_4f2fw")]
+position = Vector2(0, 380)
 
 [connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
