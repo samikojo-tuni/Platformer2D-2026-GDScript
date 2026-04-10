@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://csw86484h6vjr"]
+
+[ext_resource type="PackedScene" uid="uid://cpr4wvwpkjrlg" path="res://Scenes/UI/Healthbar.tscn" id="1_58co4"]
+[ext_resource type="Script" uid="uid://dsk0t8yn4stol" path="res://Code/UI/Score.gd" id="2_52ctl"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Healthbar" parent="." instance=ExtResource("1_58co4")]
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 16
+text = "Score: xxxxxxx"
+horizontal_alignment = 2
+script = ExtResource("2_52ctl")

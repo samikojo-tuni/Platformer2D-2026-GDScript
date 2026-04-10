@@ -37,6 +37,10 @@ folder_colors={
 "res://Scenes/": "purple"
 }
 
+[gui]
+
+theme/custom_font="uid://dm6f54ihfjoeh"
+
 [input]
 
 MoveLeft={
