@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci1kxdqp42dgw"]
+
+[ext_resource type="Texture2D" uid="uid://cronuwgcvhps" path="res://Art/sprites/world_tileset.png" id="1_ei4bg"]
+[ext_resource type="Script" uid="uid://etpavr0nydof" path="res://Code/UI/Tutorial.gd" id="1_gv6o7"]
+[ext_resource type="Texture2D" uid="uid://b3lmwbllvc4uu" path="res://Art/sprites/ui-border.png" id="2_gv6o7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4n3lu"]
+size = Vector2(16, 15)
+
+[node name="Tutorial" type="Area2D"]
+script = ExtResource("1_gv6o7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_ei4bg")
+hframes = 16
+vframes = 16
+frame = 56
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_4n3lu")
+
+[node name="Control" type="Control" parent="."]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = -39.0
+offset_top = -77.0
+offset_right = 41.0
+offset_bottom = -17.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gv6o7")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="Control/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Test text"
+autowrap_mode = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

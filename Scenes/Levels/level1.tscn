@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bdhpo6wross4e"]
+[gd_scene load_steps=23 format=4 uid="uid://bdhpo6wross4e"]
 
 [ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="1_7u4ml"]
 [ext_resource type="Script" uid="uid://bq3k8h1d037yt" path="res://Code/Level/Level.gd" id="1_c0r4e"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dnxgt2jguiqky" path="res://Code/Level/FollowCamera.gd" id="11_ilsv2"]
 [ext_resource type="PackedScene" uid="uid://dnofut7wu4b8p" path="res://Scenes/Levels/KillZone.tscn" id="12_4f2fw"]
 [ext_resource type="Script" uid="uid://cse25a3ichqv5" path="res://Code/Level/Mushroom.gd" id="13_8r8ce"]
+[ext_resource type="PackedScene" uid="uid://ci1kxdqp42dgw" path="res://Scenes/Levels/Tutorials/Tutorial.tscn" id="14_nqasx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("4_0xrym")
@@ -174,7 +175,7 @@ radius = 7.0
 script = ExtResource("1_c0r4e")
 
 [node name="Knight" parent="." instance=ExtResource("1_7u4ml")]
-position = Vector2(324, 149)
+position = Vector2(330, 159)
 
 [node name="Coins" type="Node2D" parent="."]
 
@@ -319,5 +320,23 @@ frame = 87
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollower/Mushroom"]
 shape = SubResource("CircleShape2D_ryjqc")
 
+[node name="Tutorials" type="Node2D" parent="."]
+
+[node name="Tutorial1" parent="Tutorials" instance=ExtResource("14_nqasx")]
+position = Vector2(310, 160)
+
+[node name="Label" parent="Tutorials/Tutorial1/Control/NinePatchRect" index="0"]
+text = "Liiku WASD-painikkeilla
+Hyppää space:lla."
+
+[node name="Tutorial2" parent="Tutorials" instance=ExtResource("14_nqasx")]
+position = Vector2(279, 162)
+
+[node name="Label" parent="Tutorials/Tutorial2/Control/NinePatchRect" index="0"]
+text = "Varo vihollista! Osuma sattuu!"
+
 [connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
 [connection signal="body_entered" from="Path2D/PathFollower/Mushroom" to="Path2D/PathFollower/Mushroom" method="_on_body_entered"]
+
+[editable path="Tutorials/Tutorial1"]
+[editable path="Tutorials/Tutorial2"]
