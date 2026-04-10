@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bdhpo6wross4e"]
+[gd_scene load_steps=22 format=4 uid="uid://bdhpo6wross4e"]
 
 [ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="1_7u4ml"]
 [ext_resource type="Script" uid="uid://bq3k8h1d037yt" path="res://Code/Level/Level.gd" id="1_c0r4e"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://csw86484h6vjr" path="res://Scenes/UI/MainUI.tscn" id="10_ilsv2"]
 [ext_resource type="Script" uid="uid://dnxgt2jguiqky" path="res://Code/Level/FollowCamera.gd" id="11_ilsv2"]
 [ext_resource type="PackedScene" uid="uid://dnofut7wu4b8p" path="res://Scenes/Levels/KillZone.tscn" id="12_4f2fw"]
+[ext_resource type="Script" uid="uid://cse25a3ichqv5" path="res://Code/Level/Mushroom.gd" id="13_8r8ce"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("4_0xrym")
@@ -160,6 +161,15 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="Curve2D" id="Curve2D_nqasx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 24, 184, 0, 0, 0, 0, 24, 171)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ryjqc"]
+radius = 7.0
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_c0r4e")
 
@@ -285,4 +295,29 @@ target = NodePath("../Knight")
 [node name="KillZone" parent="." instance=ExtResource("12_4f2fw")]
 position = Vector2(0, 380)
 
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_nqasx")
+
+[node name="PathFollower" type="PathFollow2D" parent="Path2D"]
+position = Vector2(24, 184)
+rotation = -1.5707964
+script = ExtResource("7_20uw2")
+speed = 25.0
+metadata/_custom_type_script = "uid://bpvcav52jl3q4"
+
+[node name="Mushroom" type="Area2D" parent="Path2D/PathFollower"]
+rotation = 1.5707964
+script = ExtResource("13_8r8ce")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollower/Mushroom"]
+z_index = -1
+texture = ExtResource("4_0xrym")
+hframes = 16
+vframes = 16
+frame = 87
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollower/Mushroom"]
+shape = SubResource("CircleShape2D_ryjqc")
+
 [connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
+[connection signal="body_entered" from="Path2D/PathFollower/Mushroom" to="Path2D/PathFollower/Mushroom" method="_on_body_entered"]
