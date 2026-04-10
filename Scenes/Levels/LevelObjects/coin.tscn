@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://chv0cnt1a11yb"]
+[gd_scene load_steps=22 format=3 uid="uid://chv0cnt1a11yb"]
 
 [ext_resource type="Script" uid="uid://dbr0n41alx4vt" path="res://Code/Level/Coin.gd" id="1_3fgmv"]
 [ext_resource type="Texture2D" uid="uid://shf5lkf8lm04" path="res://Art/sprites/coin.png" id="1_4e80h"]
+[ext_resource type="AudioStream" uid="uid://cfc1p5mvp2tv4" path="res://Audio/sounds/coin.wav" id="3_dkelk"]
+[ext_resource type="Texture2D" uid="uid://bb5fgreed1iti" path="res://Art/sprites/star.png" id="4_pdgku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3fgmv"]
 radius = 5.0
@@ -98,6 +100,29 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_bcx5b"]
+offsets = PackedFloat32Array(0, 0.625, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 0.7708333, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b8fmg"]
+gradient = SubResource("Gradient_bcx5b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_japgy"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 10.0
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 15.0
+angular_velocity_min = -45.000015
+angular_velocity_max = 44.999985
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.59999996
+color_ramp = SubResource("GradientTexture1D_b8fmg")
+
 [node name="Coin" type="Area2D"]
 script = ExtResource("1_3fgmv")
 
@@ -108,5 +133,18 @@ shape = SubResource("CircleShape2D_3fgmv")
 sprite_frames = SubResource("SpriteFrames_fu4d6")
 autoplay = "default"
 frame_progress = 0.7139085
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dkelk")
+bus = &"Effects"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = ExtResource("4_pdgku")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_japgy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,6 +2,8 @@ class_name Level extends Node2D
 
 @onready var knight: Knight = $Knight
 @onready var healthbar: Healthbar = $CanvasLayer/Healthbar
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
 
 # Ritarin aloituspiste
 var _spawn_point : Vector2 = Vector2.ZERO
@@ -13,6 +15,9 @@ func _ready() -> void:
 	
 	# Aseta ritarin aloituspiste
 	_spawn_point = knight.global_position
+	
+	# Toista musiikki
+	music_player.play()
 
 func respawn_knight() -> void:
 	knight.global_position = _spawn_point

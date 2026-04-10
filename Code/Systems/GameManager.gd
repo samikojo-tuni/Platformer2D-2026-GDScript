@@ -26,6 +26,11 @@ func set_score(new_score : int) -> void:
 	_score = max(new_score, 0)
 	# Emit a signal every time the score is updated.
 	score_changed.emit(_score)
+
+func get_scene_tree() -> SceneTree:
+	if _scene_tree == null:
+		_scene_tree = get_tree()
+	return _scene_tree
 #endregion	
 
 #region Level functionality

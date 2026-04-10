@@ -341,4 +341,7 @@ script = ExtResource("3_opp7e")
 
 [node name="DamageTimer" type="Timer" parent="."]
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [connection signal="health_changed" from="Health" to="." method="_on_health_changed"]

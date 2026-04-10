@@ -17,5 +17,8 @@ func collect(_knight : Knight) -> bool:
 	
 	# Merkitse esine kerätyksi ja poista se pelimaailmasta.
 	is_collected = true
-	queue_free()
+	clear()
 	return true
+
+func clear() -> void:
+	queue_free()

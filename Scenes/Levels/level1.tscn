@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bdhpo6wross4e"]
+[gd_scene load_steps=24 format=4 uid="uid://bdhpo6wross4e"]
 
 [ext_resource type="PackedScene" uid="uid://crcac03n0c3pb" path="res://Scenes/Characters/Knight.tscn" id="1_7u4ml"]
 [ext_resource type="Script" uid="uid://bq3k8h1d037yt" path="res://Code/Level/Level.gd" id="1_c0r4e"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dnofut7wu4b8p" path="res://Scenes/Levels/KillZone.tscn" id="12_4f2fw"]
 [ext_resource type="Script" uid="uid://cse25a3ichqv5" path="res://Code/Level/Mushroom.gd" id="13_8r8ce"]
 [ext_resource type="PackedScene" uid="uid://ci1kxdqp42dgw" path="res://Scenes/Levels/Tutorials/Tutorial.tscn" id="14_nqasx"]
+[ext_resource type="AudioStream" uid="uid://jmd76wo8vm0j" path="res://Audio/music/time_for_adventure.mp3" id="15_ryjqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0r4e"]
 texture = ExtResource("4_0xrym")
@@ -334,6 +335,11 @@ position = Vector2(279, 162)
 
 [node name="Label" parent="Tutorials/Tutorial2/Control/NinePatchRect" index="0"]
 text = "Varo vihollista! Osuma sattuu!"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("15_ryjqc")
+bus = &"Music"
 
 [connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
 [connection signal="body_entered" from="Path2D/PathFollower/Mushroom" to="Path2D/PathFollower/Mushroom" method="_on_body_entered"]
